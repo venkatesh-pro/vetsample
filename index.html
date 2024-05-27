@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetKonnect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header {
+            display: flex;
+            justify-content: left;
+            padding: 10px 20px;
+            background: #fff;
+        }
+        .logo {
+            display: block;
+            width: 120px;
+        }
+        .banner {
+            background: url('https://i.ibb.co/cXC6YX0/Picture-1.jpg') no-repeat center center;
+            background-size: cover;
+            color: black;
+            padding: 200px;
+            text-align: center;
+        }
+        .content, .register-section { padding: 20px; }
+        .cta {
+            background-color: #e07a2f;
+            color: white;
+            display: block;
+            text-align: center;
+            padding: 10px;
+            width: 200px;
+            margin: 20px auto;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+        .cards-container, .challenge-cards {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px 0;
+        }
+        .card, .challenge-card {
+            background-color: #e07a2f;
+            color: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            width: 250px;
+            height: 250px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .fa {
+            margin-bottom: 10px;
+            font-size: 30px;
+            color: white;
+        }
+        .why-register, .contact-form {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            background-color: #f8f8f8;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .why-register h2, .contact-form h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .why-register p, .contact-form p {
+            text-align: left;
+            margin: 0 auto;
+            max-width: 750px;
+        }
+        form {
+            max-width: 750px;
+            margin: 20px auto;
+            background: #f8f8f8;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+        }
+        .date-time-picker {
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="data:image/png;base64,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" class="logo" alt="VetKonnect Logo">
+    </header>
+    <div class="banner">
+        <h1>VetKonnect</h1>
+        <p>A one-stop digital platform for Veterinary Clinics / Doctors to expand their digital journey.</p>
+        <p>Our technology helps your business grow.</p>
+        <a href="#register" class="cta">Register Now</a>
+    </div>
+    <div class="why-register">
+        <h2>Here's why you should register with VetKonnect</h2>
+        <p>The future of Vet practice is less about transactional care and more about driving meaningful interactions. Through VetKonnect, Veterinary doctors and clinics can deliver holistic models of care whilst empowering and supporting pet parents to take more control of their pet's health journey.</p>
+    </div>
+
+    <div class="content">
+        <div class="cards-container">
+            <div class="card">
+                <i class="fa fa-calendar-check"></i>
+                <h3>Fewer Missed Appointments</h3>
+                <p>Improve your clinic's efficiency with automatic scheduling and reminders.</p>
+            </div>
+            <div class="card">
+                <i class="fa fa-bell"></i>
+                <h3>Apt Reminders, Notifications</h3>
+                <p>Keep your clients informed and prepared for upcoming appointments with timely reminders.</p>
+            </div>
+            <div class="card">
+                <i class="fa fa-credit-card"></i>
+                <h3>Hassle-Free Payment Collections</h3>
+                <p>Streamline your billing process and reduce overhead with our integrated payment solutions.</p>
+            </div>
+          </div>
+          <div class="why-register">
+              <h2> <center> Life before VetKonnect</h2>
+              <p> <center>Constantly worrying about costs, and engaging with pet parents. </p>
+          </div>
+        </div>
+        <div class="challenge-cards">
+            <div class="challenge-card">
+                <i class="fa fa-user-clock"></i>
+                <h3>Busy Schedules</h3>
+                <p>Difficulty in reaching, communicating, and engaging with pet parents due to busy schedules.</p>
+            </div>
+            <div class="challenge-card">
+                <i class="fa fa-network-wired"></i>
+                <h3>System Disconnect</h3>
+                <p>Feeling 'lost in the system' with disconnects in services, hospital admin systems, and interdepartmental communication.</p>
+            </div>
+            <div class="challenge-card">
+                <i class="fa fa-syringe"></i>
+                <h3>Streamlined Care</h3>
+                <p>Need for a streamlined software product that manages patient care, appointments, and medical records.</p>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="register-section">Register Now</h1>
+    <form>
+        <input type="text" placeholder="First Name" required>
+        <input type="text" placeholder="Last Name" required>
+        <input type="text" placeholder="Contact Number" required>
+        <input type="email" placeholder="Email ID" required>
+        <select required>
+            <option value="">Select</option>
+            <option value="doctor">Are you a Doctor?</option>
+            <option value="clinic">Are you a Clinic?</option>
+        </select>
+        <button type="button" class="cta" onclick="toggleDateTimePicker()">Request Callback</button>
+        <div class="date-time-picker">
+            <input type="datetime-local" id="callbackDateTime">
+            <button type="submit" class="cta">Submit</button>
+        </div>
+    </form>
+    <script>
+        function toggleDateTimePicker() {
+            var picker = document.querySelector('.date-time-picker');
+            picker.style.display = picker.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
